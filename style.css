@@ -39,6 +39,19 @@ body {
   border-radius: 0px 4px 4px 0px;
   margin-left: -4px;
 }
+.leftPart {
+  width: auto;
+  text-align: justify;
+  padding-right: 20px;
+}
+.completed {
+  text-decoration: line-through;
+  color: #ff0000 !important;
+}
+.completedicon {
+  color: #ff0000;
+}
+
 .list__wrapper {
   list-style: none;
   margin-top: 15px;
