@@ -2,6 +2,8 @@ let inputData = document.querySelector(".data_input");
 let addBtn = document.querySelector(".add_btn");
 let listWrapper = document.querySelector(".list__wrapper");
 const deleteSound = new Audio("deletSound.mp3");
+let errorMsg = document.querySelector(".error");
+
 addBtn.addEventListener("click", function () {
   addTask();
 });
@@ -15,12 +17,17 @@ inputData.addEventListener("keyup", function (event) {
 function addTask() {
   //This line will help to must be input some value
   if (inputData.value.trim() !== "") {
+    errorMassage("Task Added", "#4cb04c");
+    errorMsg.classList.add("msgshow");
+    setTimeout(errorRemove, 1000);
+
     let createItem = document.createElement("li");
     listWrapper.appendChild(createItem);
     // Task context
     let taskText = document.createElement("p");
     taskText.innerText = inputData.value;
     createItem.appendChild(taskText);
+    taskText.setAttribute("class", "leftPart");
 
     let rightpart = document.createElement("div");
     // Edit button and check button
@@ -39,10 +46,6 @@ function addTask() {
     editButton.setAttribute("id", "edit_item");
 
     editButton.addEventListener("click", function () {
-      // const updatedText = prompt("Edit Task:", createItem.innerText.trim());
-      // if (updatedText !== null) {
-      //   createItem.innerText = updatedText;
-      // }
       inputData.focus();
       inputData.value = taskText.innerText.trim();
     });
@@ -56,6 +59,7 @@ function addTask() {
     checkButton.addEventListener("click", function () {
       taskText.classList.toggle("completed");
       checkButton.classList.toggle("completedicon");
+      editButton.classList.toggle("hide");
     });
 
     let close = document.createElement("i");
@@ -66,19 +70,34 @@ function addTask() {
 
     listWrapper.insertBefore(createItem, listWrapper.firstChild);
 
-    let removeItem = document.querySelector("#remove_item");
-    removeItem.addEventListener("click", function () {
+    close.addEventListener("click", function () {
       listWrapper.removeChild(createItem);
       deleteSound.play();
-      deleteSound.volume = 0.3;
+
+      errorMassage("Task Deleted", "red");
+      errorMsg.classList.add("msgshow");
+      setTimeout(errorRemove, 1000);
     });
+
     inputData.value = "";
     inputData.focus();
   }
 }
+
+function errorMassage(msgcontent, color) {
+  let msg = document.querySelector(".error_msg");
+  msg.innerHTML = msgcontent;
+  errorMsg.style.backgroundColor = color;
+}
+let errorMsgRemove = document.querySelector("#error_remove");
+errorMsgRemove.addEventListener("click", function () {
+  errorMsg.classList.remove("msgshow");
+});
+function errorRemove() {
+  errorMsg.classList.remove("msgshow");
+}
 function getCurrentTime() {
   const now = new Date();
-  console.log(now);
   const options = {
     timeZone: "Asia/Dhaka",
     hour12: true,

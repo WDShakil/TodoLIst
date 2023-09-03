@@ -7,6 +7,31 @@ body {
   background-color: #130023;
   font-family: "Open Sans", sans-serif;
 }
+.error {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background-color: red;
+  color: white;
+  font-size: 14px;
+  padding: 4px 4px 4px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 26px;
+  transform: translateX(100%);
+  transition: linear 0.2s;
+  visibility: hidden;
+  opacity: 0;
+}
+.error_msg {
+  margin-left: 5px;
+}
+.msgshow {
+  transform: translateX(0%);
+  opacity: 1;
+  visibility: visible;
+}
 .wrapper {
   width: 450px;
   min-height: 300px;
@@ -14,6 +39,15 @@ body {
   border-radius: 5px;
   padding: 20px;
   margin: 100px auto;
+  position: relative;
+  overflow: hidden;
+}
+#error_remove {
+  cursor: pointer;
+  background: #0000000d;
+  padding: 2px;
+  border-radius: 50%;
+  margin-left: 5px;
 }
 .wrapper h1 {
   color: black;
@@ -40,8 +74,6 @@ body {
   margin-left: -4px;
 }
 .leftPart {
-  width: auto;
-  text-align: justify;
   padding-right: 20px;
 }
 .completed {
@@ -49,7 +81,10 @@ body {
   color: #ff0000 !important;
 }
 .completedicon {
-  color: #ff0000;
+  color: #4acd1a;
+}
+.hide {
+  display: none;
 }
 
 .list__wrapper {
@@ -81,7 +116,7 @@ body {
 .time {
   font-size: 10px;
   font-weight: 300;
-  margin-right: 15px;
+  margin-right: 10px;
 }
 #rightPart {
   display: flex;
