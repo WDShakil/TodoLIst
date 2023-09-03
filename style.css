@@ -51,6 +51,7 @@ body {
 }
 .wrapper h1 {
   color: black;
+  margin-bottom: 10px;
 }
 .wrapper input {
   padding: 10px;
