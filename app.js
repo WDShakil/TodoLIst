@@ -3,11 +3,11 @@ let addBtn = document.querySelector(".add_btn");
 let listWrapper = document.querySelector(".list__wrapper");
 const deleteSound = new Audio("deletSound.mp3");
 let errorMsg = document.querySelector(".error");
-
+// This is the main function
 addBtn.addEventListener("click", function () {
   addTask();
 });
-
+// To Add Using The Enter Button
 inputData.addEventListener("keyup", function (event) {
   if (event.key === "Enter") {
     addBtn.click();
@@ -17,10 +17,12 @@ inputData.addEventListener("keyup", function (event) {
 function addTask() {
   //This line will help to must be input some value
   if (inputData.value.trim() !== "") {
+    // This message will show when the user add a task
     errorMassage("Task Added", "#4cb04c");
     errorMsg.classList.add("msgshow");
     setTimeout(errorRemove, 1000);
 
+    // This is list of task
     let createItem = document.createElement("li");
     listWrapper.appendChild(createItem);
     // Task context
@@ -29,17 +31,17 @@ function addTask() {
     createItem.appendChild(taskText);
     taskText.setAttribute("class", "leftPart");
 
+    // Right Part of the Task item
     let rightpart = document.createElement("div");
-    // Edit button and check button
+    createItem.appendChild(rightpart);
+    rightpart.setAttribute("id", "rightPart");
+    // This part will show the current time of the user when they add any task
     let timeslot = document.createElement("span");
     rightpart.appendChild(timeslot);
     timeslot.setAttribute("class", "time");
     timeslot.innerHTML = getCurrentTime();
-    // Time Slot end
-    createItem.appendChild(rightpart);
-    rightpart.setAttribute("id", "rightPart");
-    // Edit button and check button
-    // Add Edit and Check buttons/icons
+
+    // Edit Button
     let editButton = document.createElement("i");
     rightpart.appendChild(editButton);
     editButton.classList.add("ri-pencil-line");
@@ -67,9 +69,7 @@ function addTask() {
 
     close.classList.add("ri-close-line");
     close.setAttribute("id", "remove_item");
-
     listWrapper.insertBefore(createItem, listWrapper.firstChild);
-
     close.addEventListener("click", function () {
       listWrapper.removeChild(createItem);
       deleteSound.play();
@@ -83,12 +83,13 @@ function addTask() {
     inputData.focus();
   }
 }
-
+// To Create Error Message
 function errorMassage(msgcontent, color) {
   let msg = document.querySelector(".error_msg");
   msg.innerHTML = msgcontent;
   errorMsg.style.backgroundColor = color;
 }
+
 let errorMsgRemove = document.querySelector("#error_remove");
 errorMsgRemove.addEventListener("click", function () {
   errorMsg.classList.remove("msgshow");
@@ -96,6 +97,8 @@ errorMsgRemove.addEventListener("click", function () {
 function errorRemove() {
   errorMsg.classList.remove("msgshow");
 }
+
+// This function Will work for get Current time of the user
 function getCurrentTime() {
   const now = new Date();
   const options = {
